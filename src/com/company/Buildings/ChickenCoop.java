@@ -62,20 +62,26 @@ public class ChickenCoop extends Building implements AnimalCare {
     @Override
     public void animalsFeeding(){
         for(Animal chicken : chickens){
-            chicken.feed();
+            if(chicken != null) {
+                chicken.feed();
+            }
         }
     }
     @Override
-    public void animalsNotFeeding(){
+    public void animalGrowingOrNot(){
         for(Animal chicken : chickens){
-            chicken.looseWeight();
+            if(chicken != null){
+                chicken.grow();
+            }
         }
     }
     @Override
     public void removesDeadAnimal(){
         for(Animal chicken : chickens){
-            if(!chicken.isAlive()){
-                remove(chicken);
+            if(chicken != null) {
+                if (!chicken.isAlive()) {
+                    remove(chicken);
+                }
             }
         }
 
@@ -83,11 +89,12 @@ public class ChickenCoop extends Building implements AnimalCare {
 
     public void Egging(){
         for(Animal a : chickens){
-            if(a.isAdult()) {
-                chickenEggAmount += 30;
-            }
-            else{
-                System.out.println("This chicken: " +a.toString() + " is too young to give eggs.");
+            if(a != null) {
+                if (a.isAdult()) {
+                    chickenEggAmount += 30;
+                } else {
+                    System.out.println("This chicken: " + a.toString() + " is too young to give eggs.");
+                }
             }
         }
 
@@ -116,7 +123,8 @@ public class ChickenCoop extends Building implements AnimalCare {
     }
     @Override
     public String toString(){
-        return "Chicken coop name: "+ this.name + "  Chicken coop description: "+ this.description + " Chicken coop value: " +this.value +
-                " \nNumber of places for chicken: " + this.placesForChickens + " Number of chickens now:  " + this.numberOfAnimals;
+        howManyAnimalsIsThere();
+        return "Chicken coop name: "+ this.name + "  | Chicken coop description: "+ this.description + " | Chicken coop value: " +this.value +
+                " \nNumber of places for chicken: " + this.placesForChickens + " | Number of chickens now:  " + this.numberOfAnimals;
     }
 }

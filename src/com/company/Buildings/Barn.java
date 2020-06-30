@@ -2,7 +2,6 @@ package com.company.Buildings;
 
 import com.company.Animal;
 import com.company.AnimalCare;
-import com.company.Buildings.Building;
 
 public class Barn extends Building implements AnimalCare {
 
@@ -61,20 +60,26 @@ public class Barn extends Building implements AnimalCare {
     @Override
     public void animalsFeeding(){
         for(Animal cow : cows){
-            cow.feed();
+            if(cow != null) {
+                cow.feed();
+            }
         }
     }
     @Override
-    public void animalsNotFeeding(){
+    public void animalGrowingOrNot(){
         for(Animal cow: cows){
-            cow.looseWeight();
+            if(cow != null) {
+                cow.grow();
+            }
         }
     }
     @Override
     public void removesDeadAnimal(){
         for(Animal cow :cows){
-            if(!cow.isAlive()){
-                remove(cow);
+            if(cow !=null) {
+                if (!cow.isAlive()) {
+                    remove(cow);
+                }
             }
         }
 
@@ -82,11 +87,12 @@ public class Barn extends Building implements AnimalCare {
 
     public void milkingCow(){
         for(Animal a : cows){
-            if(a.isAdult()) {
-                milkAmount += 10.0;
-            }
-            else{
-                System.out.println("This cow: " +a.toString() + " is too young to milking.");
+            if(a != null) {
+                if (a.isAdult()) {
+                    milkAmount += 10.0;
+                } else {
+                    System.out.println("This cow: " + a.toString() + " is too young to milking.");
+                }
             }
         }
 
@@ -116,7 +122,8 @@ public class Barn extends Building implements AnimalCare {
 
     @Override
     public String toString(){
-        return "Barn name: "+ this.name + "  Barn description: "+ this.description + " Barn value: " +this.value +
-                " \nNumber of places for cows: " + this.placesForCows + " Number of cows now:  " + this.numberOfAnimals;
+        howManyAnimalsIsThere();
+        return "Barn name: "+ this.name + " | Barn description: "+ this.description + " | Barn value: " +this.value +
+                " \nNumber of places for cows: " + this.placesForCows + " | Number of cows now:  " + this.numberOfAnimals;
     }
 }

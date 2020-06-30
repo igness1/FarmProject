@@ -14,10 +14,10 @@ public class Farm {
     public Integer sumOfduckEggAmount=0; //in number of egg
     public Double sumOfRabbitMeatAmount = 0.0; // in kg.
 
-    public Double sumOfwheatHarvest=0.0; // in tones
-    public Double sumOfoatHarvest=0.0; // in tones
-    public Double sumOfLettuceHarvest=0.0; // in tones
-    public Double sumOfStrawberryHarvest=0.0; // in tones
+    public Double sumOfwheatHarvest=0.0; // in tonnes
+    public Double sumOfoatHarvest=0.0; // in tonnes
+    public Double sumOfLettuceHarvest=0.0; // in tonnes
+    public Double sumOfStrawberryHarvest=0.0; // in tonnes
 
     public Integer sackOfOatSeeds =10; //in numbers of sacks.
     public Integer sackOfWheatSeeds =10; //in numbers of sacks.
@@ -52,16 +52,16 @@ public class Farm {
        this.value = value;
 
        // preparing default empty fields.
-       for(Field a : fields){
-           a = new Field();
+       for(Integer i = 0;i<fields.length;i++){
+           fields[i] = new Field();
        }
    }
 
     @Override
     public String toString(){
         return "Farm name: "+ this.name + " | Farm value: "+ this.value + " | Places for barns: " +this.barns.length +
-                " \nPlaces for chicken coops: " + this.chickenCoops.length + " | Places for duck coops:  " + this.duckCoops.length
-                + " \nPlaces for rabit coops: "+ this.rabbitCoops.length;
+                " \n               Places for chicken coops: " + this.chickenCoops.length + " | Places for duck coops: " + this.duckCoops.length
+                + " | Places for rabbit coops: "+ this.rabbitCoops.length;
     }
 
    // ----------------------------------------------  BUILDING AREA ----------------------------------------------------------
@@ -161,22 +161,29 @@ public class Farm {
         System.out.println("Rabbit coop number: " + number + " was removed.");
     }
 
-    public void showAllBuildings() {
+    public Integer howMuchBuildingsIsThere() {
+        Integer number = 0;
         for (Integer i = 0; i < barns.length; i++) {
-            System.out.println("Barn number: " + i + " . | " + barns.toString());
+            if(barns[i] != null){
+                number += 1;
+            }
         }
-        System.out.println("");
         for (Integer i = 0; i < chickenCoops.length; i++) {
-            System.out.println("Chicken coop number: " + i + " . | " + chickenCoops.toString());
+            if(chickenCoops[i] != null){
+                number += 1;
+            }
         }
-        System.out.println("");
         for (Integer i = 0; i < duckCoops.length; i++) {
-            System.out.println("Duck coop number: " + i + " . | " + duckCoops.toString());
+            if(duckCoops[i] != null){
+                number += 1;
+            }
         }
-        System.out.println("");
         for (Integer i = 0; i < rabbitCoops.length; i++) {
-            System.out.println("Rabbit coop number: " + i + " . | " + rabbitCoops.toString());
+            if(rabbitCoops[i] != null){
+                number += 1;
+            }
         }
+        return number;
     }
    // --------------------------------------------------- END OF BUILDING AREA -------------------------------------------------------
 
@@ -255,26 +262,41 @@ public class Farm {
         }
     }
     //selling harvest
-    public void sellHarvest(String typeOfHarvest,Player player, Merchant merchant,Double howMuchToneToSell){
+    public void sellHarvest(String typeOfHarvest,Player player, Merchant merchant){
         if(typeOfHarvest == "oat" && sumOfoatHarvest > 0.0){
-            sumOfoatHarvest -= howMuchToneToSell;
-            player.cash += (howMuchToneToSell * merchant.priceForOneToneOfOat);
-            System.out.println("You have earned " + (howMuchToneToSell * merchant.priceForOneToneOfOat) + " coins, and sold " + howMuchToneToSell +  " tone of oat.");
+            sumOfoatHarvest -= sumOfoatHarvest;
+            player.cash += (sumOfoatHarvest * merchant.priceForOneTonneOfOat);
+            System.out.println("You have earned " + (sumOfoatHarvest * merchant.priceForOneTonneOfOat) + " coins, and sold " + sumOfoatHarvest +  " tonnes of oat.");
         }
+        else{
+            System.out.println("You don't have "  + typeOfHarvest + " harvest to sell.");
+        }
+
         if(typeOfHarvest == "wheat" && sumOfwheatHarvest > 0.0){
-            sumOfwheatHarvest -= howMuchToneToSell;
-            player.cash += (howMuchToneToSell * merchant.priceForOneToneOfWheat);
-            System.out.println("You have earned " + (howMuchToneToSell * merchant.priceForOneToneOfWheat) + " coins, and sold "  + howMuchToneToSell +  " tone of wheat.");
+            sumOfwheatHarvest -= sumOfwheatHarvest;
+            player.cash += (sumOfwheatHarvest * merchant.priceForOneTonneOfWheat);
+            System.out.println("You have earned " + (sumOfwheatHarvest * merchant.priceForOneTonneOfWheat) + " coins, and sold "  + sumOfwheatHarvest +  " tonnes of wheat.");
         }
+        else{
+            System.out.println("You don't have "  + typeOfHarvest + " harvest to sell.");
+        }
+
         if(typeOfHarvest == "lettuce" && sumOfLettuceHarvest > 0.0){
-            sumOfLettuceHarvest -= howMuchToneToSell;
-            player.cash += (howMuchToneToSell * merchant.priceForOneToneOfLettuce);
-            System.out.println("You have earned " + (howMuchToneToSell * merchant.priceForOneToneOfLettuce) + " coins, and sold "  + howMuchToneToSell +  " tone of lettuce.");
+            sumOfLettuceHarvest -= sumOfLettuceHarvest;
+            player.cash += (sumOfLettuceHarvest * merchant.priceForOneTonneOfLettuce);
+            System.out.println("You have earned " + (sumOfLettuceHarvest * merchant.priceForOneTonneOfLettuce) + " coins, and sold "  + sumOfLettuceHarvest +  " tonnes of lettuce.");
         }
+        else{
+            System.out.println("You don't have "  + typeOfHarvest + " harvest to sell.");
+        }
+
         if(typeOfHarvest == "wheat" && sumOfStrawberryHarvest > 0.0){
-            sumOfStrawberryHarvest -= howMuchToneToSell;
-            player.cash += (howMuchToneToSell * merchant.priceForOneToneOfStrawberries);
-            System.out.println("You have earned " + (howMuchToneToSell * merchant.priceForOneToneOfStrawberries) + " coins, and sold "  + howMuchToneToSell +  " tone of strawberries.");
+            sumOfStrawberryHarvest -= sumOfStrawberryHarvest;
+            player.cash += (sumOfStrawberryHarvest * merchant.priceForOneTonneOfStrawberries);
+            System.out.println("You have earned " + (sumOfStrawberryHarvest * merchant.priceForOneTonneOfStrawberries) + " coins, and sold "  + sumOfStrawberryHarvest +  " tonnes of strawberries.");
+        }
+        else{
+            System.out.println("You don't have "  + typeOfHarvest + " harvest to sell.");
         }
     }
     public void buySeeds(Integer howManySacks, String typeOfPlant, Player player, Merchant merchant){
@@ -323,116 +345,166 @@ public class Farm {
            System.out.println("You don't have enough money to buy animal food.");
        }
     }
+    // animal are growing where they are fed and loose weight when they are not fed.
+    public void animalGrowingOrNot(){
+        for(Barn barn :barns){
+            if(barn != null) {
+                barn.animalGrowingOrNot();
+            }
+        }
+        for(ChickenCoop chickenCoop : chickenCoops){
+            if(chickenCoop != null) {
+                chickenCoop.animalGrowingOrNot();
+            }
+        }
+        for(DuckCoop duckCoop : duckCoops){
+            if(duckCoop != null) {
+                duckCoop.animalGrowingOrNot();
+            }
+        }
+        for(RabbitCoop rabbitCoop : rabbitCoops){
+            if(rabbitCoop != null) {
+                rabbitCoop.animalGrowingOrNot();
+            }
+        }
+    }
     //feeding animals for week.
     public void feed(){
-       for(Barn barn : barns){
-           if(isSomethingToFeedAnimals == "oat"){
-                 barn.animalsFeeding();
-                 sumOfoatHarvest -=0.05;
-           }else if(isSomethingToFeedAnimals == "wheat"){
-               barn.animalsFeeding();
-               sumOfwheatHarvest -=0.05;
-           }else if(isSomethingToFeedAnimals == "animalsFood"){
-               barn.animalsFeeding();
-               animalFood -=10;
-           }else if(isSomethingToFeedAnimals == null){
-               barn.animalsNotFeeding();
+       isSomethingToFeedAnimals();
+       if(isSomethingToFeedAnimals != null) {
+           for (Barn barn : barns) {
+               if (barn != null) {
+                   if (isSomethingToFeedAnimals == "oat") {
+                       barn.animalsFeeding();
+                       sumOfoatHarvest -= 0.05;
+                   } else if (isSomethingToFeedAnimals == "wheat") {
+                       barn.animalsFeeding();
+                       sumOfwheatHarvest -= 0.05;
+                   } else if (isSomethingToFeedAnimals == "animalsFood") {
+                       barn.animalsFeeding();
+                       animalFood -= 10;
+                   }
+               }
            }
-       }
-       for(ChickenCoop chickenCoop : chickenCoops){
-            if(isSomethingToFeedAnimals == "oat"){
-                chickenCoop.animalsFeeding();
-                sumOfoatHarvest -=0.05;
-            }else if(isSomethingToFeedAnimals == "wheat"){
-                chickenCoop.animalsFeeding();
-                sumOfwheatHarvest -=0.05;
-            }else if(isSomethingToFeedAnimals == "animalsFood"){
-                chickenCoop.animalsFeeding();
-                animalFood -=10;
-            }
-            else if(isSomethingToFeedAnimals == null){
-                chickenCoop.animalsNotFeeding();
-            }
-       }
-       for(DuckCoop duckCoop : duckCoops){
-            if(isSomethingToFeedAnimals == "oat"){
-                duckCoop.animalsFeeding();
-                sumOfoatHarvest -=0.05;
-            }else if(isSomethingToFeedAnimals == "wheat"){
-                duckCoop.animalsFeeding();
-                sumOfwheatHarvest -=0.05;
-            }else if(isSomethingToFeedAnimals == "animalsFood"){
-                duckCoop.animalsFeeding();
-                animalFood -=10;
-            }else if(isSomethingToFeedAnimals == null){
-                duckCoop.animalsNotFeeding();
-            }
-       }
-       for(RabbitCoop rabbitCoop : rabbitCoops){
-            if(isSomethingToFeedAnimals == "oat"){
-                rabbitCoop.animalsFeeding();
-                sumOfoatHarvest -=0.05;
-            }else if(isSomethingToFeedAnimals == "wheat"){
-                rabbitCoop.animalsFeeding();
-                sumOfwheatHarvest -=0.05;
-            }else if(isSomethingToFeedAnimals == "animalsFood"){
-                rabbitCoop.animalsFeeding();
-                animalFood -=10;
-            }else if(isSomethingToFeedAnimals == null){
-                rabbitCoop.animalsNotFeeding();
-            }
+           for (ChickenCoop chickenCoop : chickenCoops) {
+               if (chickenCoop != null) {
+                   if (isSomethingToFeedAnimals == "oat") {
+                       chickenCoop.animalsFeeding();
+                       sumOfoatHarvest -= 0.05;
+                   } else if (isSomethingToFeedAnimals == "wheat") {
+                       chickenCoop.animalsFeeding();
+                       sumOfwheatHarvest -= 0.05;
+                   } else if (isSomethingToFeedAnimals == "animalsFood") {
+                       chickenCoop.animalsFeeding();
+                       animalFood -= 10;
+                   }
+               }
+           }
+           for (DuckCoop duckCoop : duckCoops) {
+               if (duckCoop != null) {
+                   if (isSomethingToFeedAnimals == "oat") {
+                       duckCoop.animalsFeeding();
+                       sumOfoatHarvest -= 0.05;
+                   } else if (isSomethingToFeedAnimals == "wheat") {
+                       duckCoop.animalsFeeding();
+                       sumOfwheatHarvest -= 0.05;
+                   } else if (isSomethingToFeedAnimals == "animalsFood") {
+                       duckCoop.animalsFeeding();
+                       animalFood -= 10;
+                   }
+               }
+           }
+           for (RabbitCoop rabbitCoop : rabbitCoops) {
+               if (rabbitCoop != null) {
+                   if (isSomethingToFeedAnimals == "oat") {
+                       rabbitCoop.animalsFeeding();
+                       sumOfoatHarvest -= 0.05;
+                   } else if (isSomethingToFeedAnimals == "wheat") {
+                       rabbitCoop.animalsFeeding();
+                       sumOfwheatHarvest -= 0.05;
+                   } else if (isSomethingToFeedAnimals == "animalsFood") {
+                       rabbitCoop.animalsFeeding();
+                       animalFood -= 10;
+                   }
+               }
+           }
+           System.out.println("You feed your animals on this farm.");
        }
     }
     // when animals die
     public void removedDeadAnimals(){
         for(Barn barn :barns){
-            barn.removesDeadAnimal();
+            if(barn != null) {
+                barn.removesDeadAnimal();
+            }
         }
         for(ChickenCoop chickenCoop : chickenCoops){
-            chickenCoop.removesDeadAnimal();
+            if(chickenCoop != null) {
+                chickenCoop.removesDeadAnimal();
+            }
         }
         for(DuckCoop duckCoop : duckCoops){
-            duckCoop.removesDeadAnimal();
+            if(duckCoop != null) {
+                duckCoop.removesDeadAnimal();
+            }
         }
         for(RabbitCoop rabbitCoop : rabbitCoops){
-            rabbitCoop.removesDeadAnimal();
+            if(rabbitCoop != null) {
+                rabbitCoop.removesDeadAnimal();
+            }
         }
     }
     // egging, milking, killing xd
     public void allAnimalsMakeRawMaterial(){
         for(Barn barn : barns){
-             barn.milkingCow();
+            if(barn != null) {
+                barn.milkingCow();
+            }
         }
         for(ChickenCoop chickenCoop : chickenCoops){
-           chickenCoop.Egging();
+            if(chickenCoop != null) {
+                chickenCoop.Egging();
+            }
         }
         for(DuckCoop duckCoop : duckCoops){
-           duckCoop.Egging();
+            if(duckCoop != null) {
+                duckCoop.Egging();
+            }
         }
         for(RabbitCoop rabbitCoop : rabbitCoops){
-           rabbitCoop.killRabbitAndMakeMeat();
+            if(rabbitCoop != null) {
+                rabbitCoop.killRabbitAndMakeMeat();
+            }
         }
     }
     //if we want one type of animals make items. For example only duck make eggs.
     public void makeRawMaterialFromOneTypeOfAnimal(String typeOfAnimal){
        if(typeOfAnimal == "cow") {
            for (Barn barn : barns) {
-               barn.milkingCow();
+               if(barn != null) {
+                   barn.milkingCow();
+               }
            }
        }
        else if(typeOfAnimal == "chicken") {
            for (ChickenCoop chickenCoop : chickenCoops) {
-               chickenCoop.Egging();
+               if(chickenCoop != null) {
+                   chickenCoop.Egging();
+               }
            }
        }
        else if(typeOfAnimal == "duck") {
            for (DuckCoop duckCoop : duckCoops) {
-               duckCoop.Egging();
+               if(duckCoop != null) {
+                   duckCoop.Egging();
+               }
            }
        }
        else if(typeOfAnimal == "rabbit") {
            for (RabbitCoop rabbitCoop : rabbitCoops) {
-               rabbitCoop.killRabbitAndMakeMeat();
+               if(rabbitCoop != null) {
+                   rabbitCoop.killRabbitAndMakeMeat();
+               }
            }
        }
     }
@@ -440,37 +512,60 @@ public class Farm {
     //gathering sum
     public void addRawMaterialToSum(){
        for(Barn barn : barns){
-           sumOfMilk += barn.milkAmount;
+           if(barn != null) {
+               sumOfMilk += barn.milkAmount;
+           }
        }
        for(ChickenCoop chickenCoop : chickenCoops){
-           sumOfchickenEggAmount += chickenCoop.chickenEggAmount;
+           if(chickenCoop != null) {
+               sumOfchickenEggAmount += chickenCoop.chickenEggAmount;
+           }
        }
        for(DuckCoop duckCoop : duckCoops){
-            sumOfduckEggAmount += duckCoop.duckEggAmount;
+           if(duckCoop != null) {
+               sumOfduckEggAmount += duckCoop.duckEggAmount;
+           }
        }
        for(RabbitCoop rabbitCoop : rabbitCoops){
-            sumOfRabbitMeatAmount += rabbitCoop.rabbitMeatAmount;
+           if(rabbitCoop != null) {
+               sumOfRabbitMeatAmount += rabbitCoop.rabbitMeatAmount;
+           }
        }
     }
 
 
-    public void sellOneTypeOfRawMaterial(String typeOfAnimal, Player player,Merchant merchant, Double howMuch, Integer howMuch1){
-        if(typeOfAnimal == "cow" && sumOfMilk>0.0){
-            sumOfMilk -= howMuch;
-            player.cash += (howMuch * merchant.priceForOneLiterOfMilk);
-            System.out.println("You have sold " + howMuch + " liters of milk. You have earned " + (howMuch * merchant.priceForOneLiterOfMilk) + " coins.");
-        }else if(typeOfAnimal == "duck" && sumOfduckEggAmount>0){
-            sumOfduckEggAmount -= howMuch1;
-            player.cash += (howMuch1 * merchant.priceForOneDuckEgg);
-            System.out.println("You have sold " + howMuch1 + " duck eggs. You have earned " + (howMuch1 * merchant.priceForOneDuckEgg) + " coins.");
-        }else if(typeOfAnimal == "chicken" && sumOfchickenEggAmount>0){
-            sumOfchickenEggAmount -= howMuch1;
-            player.cash += (howMuch1 * merchant.priceForOneChickenEgg);
-            System.out.println("You have sold " + howMuch1 + " chicken eggs. You have earned " + (howMuch1 * merchant.priceForOneChickenEgg) + " coins.");
-        }else if(typeOfAnimal == "rabbit" && sumOfRabbitMeatAmount>0){
-            sumOfRabbitMeatAmount -= howMuch;
-            player.cash += (howMuch * merchant.priceForOneKgRabbitMeat);
-            System.out.println("You have sold " + howMuch + " kg of rabbit meat. You have earned " + (howMuch * merchant.priceForOneKgRabbitMeat) + " coins.");
+    public void sellRawMaterial( Player player,Merchant merchant){
+        if(sumOfMilk>0.0){
+            sumOfMilk -= sumOfMilk;
+            player.cash += (sumOfMilk * merchant.priceForOneLiterOfMilk);
+            System.out.println("You have sold " + sumOfMilk + " liters of milk. You have earned " + (sumOfMilk * merchant.priceForOneLiterOfMilk) + " coins.");
+        }
+        else{
+            System.out.println("You don't have milk to sell.");
+        }
+        if(sumOfduckEggAmount>0){
+            sumOfduckEggAmount -= sumOfduckEggAmount;
+            player.cash += (sumOfduckEggAmount * merchant.priceForOneDuckEgg);
+            System.out.println("You have sold " + sumOfduckEggAmount + " duck eggs. You have earned " + (sumOfduckEggAmount * merchant.priceForOneDuckEgg) + " coins.");
+        }
+        else{
+            System.out.println("You don't have duck eggs to sell.");
+        }
+        if(sumOfchickenEggAmount>0){
+            sumOfchickenEggAmount -= sumOfchickenEggAmount;
+            player.cash += (sumOfchickenEggAmount * merchant.priceForOneChickenEgg);
+            System.out.println("You have sold " + sumOfchickenEggAmount + " chicken eggs. You have earned " + (sumOfchickenEggAmount * merchant.priceForOneChickenEgg) + " coins.");
+        }
+        else{
+            System.out.println("You don't have chicken eggs to sell.");
+        }
+        if(sumOfRabbitMeatAmount>0){
+            sumOfRabbitMeatAmount -= sumOfRabbitMeatAmount;
+            player.cash += (sumOfRabbitMeatAmount * merchant.priceForOneKgRabbitMeat);
+            System.out.println("You have sold " + sumOfRabbitMeatAmount + " kg of rabbit meat. You have earned " + (sumOfRabbitMeatAmount * merchant.priceForOneKgRabbitMeat) + " coins.");
+        }
+        else{
+            System.out.println("You don't have rabbit meat to sell.");
         }
     }
 
@@ -488,7 +583,7 @@ public class Farm {
     public void sellAnimal(String species,Integer howMuch, Player player, Merchant merchant, Integer animalBuildingNumber) {
         Integer selledAnimals = 0;
         if(species == "cow" ) {
-           if(barns[animalBuildingNumber].howManyAnimalsIsThere()>=howMuch) {
+           if(barns[animalBuildingNumber].howManyAnimalsIsThere()>=howMuch && barns[animalBuildingNumber] != null) {
                do {
                    for (Animal animal : barns[animalBuildingNumber].cows) {
                        if (animal != null) {
@@ -501,7 +596,7 @@ public class Farm {
                        }
                    }
                }
-               while (selledAnimals == howMuch);
+               while (selledAnimals != howMuch);
                System.out.println("You sold "+ howMuch + "animals, species: "+ species);
            }
            else{
@@ -509,7 +604,7 @@ public class Farm {
            }
         }
         else if(species == "chicken" ) {
-            if(chickenCoops[animalBuildingNumber].howManyAnimalsIsThere()>=howMuch) {
+            if(chickenCoops[animalBuildingNumber].howManyAnimalsIsThere()>=howMuch && chickenCoops[animalBuildingNumber] != null) {
                 do {
                     for (Animal animal : chickenCoops[animalBuildingNumber].chickens) {
                         if (animal != null) {
@@ -522,7 +617,7 @@ public class Farm {
                         }
                     }
                 }
-                while (selledAnimals == howMuch);
+                while (selledAnimals != howMuch);
                 System.out.println("You sold "+ howMuch + "animals, species: "+ species);
             }
             else{
@@ -530,7 +625,7 @@ public class Farm {
             }
         }
         else if(species == "duck" ) {
-            if(duckCoops[animalBuildingNumber].howManyAnimalsIsThere()>=howMuch) {
+            if(duckCoops[animalBuildingNumber].howManyAnimalsIsThere()>=howMuch && duckCoops[animalBuildingNumber] != null) {
                 do {
                     for (Animal animal : duckCoops[animalBuildingNumber].ducks) {
                         if (animal != null) {
@@ -543,7 +638,7 @@ public class Farm {
                         }
                     }
                 }
-                while (selledAnimals == howMuch);
+                while (selledAnimals != howMuch);
                 System.out.println("You sold "+ howMuch + "animals, species: "+ species);
             }
             else{
@@ -551,7 +646,7 @@ public class Farm {
              }
         }
         else if(species == "rabbit" ) {
-            if(rabbitCoops[animalBuildingNumber].howManyAnimalsIsThere()>=howMuch) {
+            if(rabbitCoops[animalBuildingNumber].howManyAnimalsIsThere()>=howMuch && rabbitCoops[animalBuildingNumber] != null) {
                 do {
                     for (Animal animal : rabbitCoops[animalBuildingNumber].rabbits) {
                         if (animal != null) {
@@ -564,7 +659,7 @@ public class Farm {
                         }
                     }
                 }
-                while (selledAnimals == howMuch);
+                while (selledAnimals != howMuch);
                 System.out.println("You sold "+ howMuch + "animals, species: "+ species);
             }
             else{
@@ -577,7 +672,7 @@ public class Farm {
     public void buyAnimal(String species,Integer howMuch, Player player, Merchant merchant, Integer animalBuildingNumber){
        if(species == "cow"){
            if(player.cash>=merchant.priceForYoungCow){
-               if(barns[animalBuildingNumber].isFreePlaceForAnimals(howMuch)) {
+               if(barns[animalBuildingNumber].isFreePlaceForAnimals(howMuch) && barns[animalBuildingNumber] != null) {
                    for (Integer i = merchant.cowNumber; i < merchant.cowNumber + howMuch; i++) {
                        barns[animalBuildingNumber].add(merchant.cows[i]);
                    }
@@ -585,7 +680,8 @@ public class Farm {
                    player.cash -= merchant.priceForYoungCow;
                }
                else{
-                   System.out.println("You don't have "+ howMuch + " free place for cows in barn number: " + animalBuildingNumber);
+                   System.out.println("You don't have "+ howMuch + " free place for cows in barn number: " + animalBuildingNumber
+                   + "\n or this barn doesn't exist.");
                }
            }
            else{
@@ -594,7 +690,7 @@ public class Farm {
        }
        else if(species == "duck"){
            if(player.cash>=merchant.priceForYoungDuck){
-               if(duckCoops[animalBuildingNumber].isFreePlaceForAnimals(howMuch)) {
+               if(duckCoops[animalBuildingNumber].isFreePlaceForAnimals(howMuch) && duckCoops[animalBuildingNumber] != null) {
                    for (Integer i = merchant.duckNumber; i < merchant.duckNumber + howMuch; i++) {
                        duckCoops[animalBuildingNumber].add(merchant.ducks[i]);
                    }
@@ -602,7 +698,8 @@ public class Farm {
                    player.cash -= merchant.priceForYoungDuck;
                }
                else{
-                   System.out.println("You don't have "+ howMuch + " free place for ducks in duck coop number: " + animalBuildingNumber);
+                   System.out.println("You don't have "+ howMuch + " free place for ducks in duck coop number: " + animalBuildingNumber
+                   + "\n or this duck coop doesn't exist.");
                }
            }
            else{
@@ -611,7 +708,7 @@ public class Farm {
        }
        else if(species == "chicken"){
            if(player.cash>=merchant.priceForYoungChicken){
-               if(chickenCoops[animalBuildingNumber].isFreePlaceForAnimals(howMuch)) {
+               if(chickenCoops[animalBuildingNumber].isFreePlaceForAnimals(howMuch) && chickenCoops[animalBuildingNumber] != null) {
                    for (Integer i = merchant.chickenNumber; i < merchant.chickenNumber + howMuch; i++) {
                        chickenCoops[animalBuildingNumber].add(merchant.chickens[i]);
                    }
@@ -619,7 +716,8 @@ public class Farm {
                    player.cash -= merchant.priceForYoungChicken;
                }
                else{
-                   System.out.println("You don't have "+ howMuch + " free place for chickens in chicken coop number: " + animalBuildingNumber);
+                   System.out.println("You don't have "+ howMuch + " free place for chickens in chicken coop number: " + animalBuildingNumber
+                   + "\n or this chicken coop doesn't exist.");
                }
            }
            else{
@@ -628,7 +726,7 @@ public class Farm {
        }
        else if(species == "rabbit"){
            if(player.cash>=merchant.priceForYoungRabbit){
-               if(rabbitCoops[animalBuildingNumber].isFreePlaceForAnimals(howMuch)) {
+               if(rabbitCoops[animalBuildingNumber].isFreePlaceForAnimals(howMuch) && rabbitCoops[animalBuildingNumber] != null) {
                    for (Integer i = merchant.rabbitNumber; i < merchant.rabbitNumber + howMuch; i++) {
                        rabbitCoops[animalBuildingNumber].add(merchant.rabbits[i]);
                    }
@@ -636,7 +734,8 @@ public class Farm {
                    player.cash -= merchant.priceForYoungRabbit;
                }
                else{
-                   System.out.println("You don't have "+ howMuch + " free place for rabbits in rabbit coop number: " + animalBuildingNumber);
+                   System.out.println("You don't have "+ howMuch + " free place for rabbits in rabbit coop number: " + animalBuildingNumber
+                   + "\n or this rabbit coop doesn't exist.");
                }
            }
            else{

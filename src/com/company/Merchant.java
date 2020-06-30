@@ -15,17 +15,16 @@ public class Merchant {
         addAnimalsToSell();
         addBuildingsToSell();
         addFarms();
-
     }
 
     //prices for items, maybe give it to merchant
     public Double priceForOneDuckEgg = 0.5;
     public Double priceForOneChickenEgg = 0.4;
     public Double priceForOneLiterOfMilk = 1.5;
-    public Double priceForOneToneOfOat = 350.0;
-    public Double priceForOneToneOfWheat = 300.0;
-    public Double priceForOneToneOfLettuce = 200.0;
-    public Double priceForOneToneOfStrawberries = 200.0;
+    public Double priceForOneTonneOfOat = 350.0;
+    public Double priceForOneTonneOfWheat = 300.0;
+    public Double priceForOneTonneOfLettuce = 200.0;
+    public Double priceForOneTonneOfStrawberries = 200.0;
     public Double priceForOneKgRabbitMeat = 15.0;
 
     public Double priceFor100kgOfAnimalFood = 35.0;
@@ -73,7 +72,7 @@ public class Merchant {
     public Integer chickenNumber = 0;
     public Integer rabbitNumber = 0;
 
-    public Farm farmsToSell[] = new Farm[20];
+    public Farm farmsToSell[] = new Farm[21];
     public Farm randomFarms[];
 
 
@@ -97,10 +96,10 @@ public class Merchant {
             bigDuckCoopToSell[i]= new DuckCoop("Big duck coop","The place to hold ducks.",350.0,25);
         }
         for(Integer i=0;i<normalRabbitCoopToSell.length;i++){
-            normalRabbitCoopToSell[i]= new RabbitCoop("Normal rabbit coop","The place for cows.",500.0,20);
+            normalRabbitCoopToSell[i]= new RabbitCoop("Normal rabbit coop","The place for cows.",200.0,20);
         }
         for(Integer i=0;i<bigRabbitCoopToSell.length;i++){
-            bigRabbitCoopToSell[i]= new RabbitCoop("Big rabbit coop","Place for cows.",500.0,20);
+            bigRabbitCoopToSell[i]= new RabbitCoop("Big rabbit coop","Place for cows.",300.0,20);
         }
     }
 
@@ -132,10 +131,15 @@ public class Merchant {
         for(Integer i=16;i<=20;i++){
             farmsToSell[i] = new Farm("Big farm : type 2",7000.0,5,6,5,4,5);
         }
-
     }
 
-
+    public void removeFarm(Farm farmToRemove){
+        for(Farm farm : farmsToSell){
+            if(farm == farmToRemove){
+                farm = null;
+            }
+        }
+    }
 
 
 

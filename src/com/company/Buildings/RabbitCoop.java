@@ -61,20 +61,26 @@ public class RabbitCoop extends Building implements AnimalCare {
     @Override
     public void animalsFeeding(){
         for(Animal rabbit : rabbits){
-            rabbit.feed();
+            if(rabbit != null) {
+                rabbit.feed();
+            }
         }
     }
     @Override
-    public void animalsNotFeeding(){
+    public void animalGrowingOrNot(){
         for(Animal rabbit : rabbits){
-            rabbit.looseWeight();
+            if(rabbit != null) {
+                rabbit.grow();
+            }
         }
     }
     @Override
     public void removesDeadAnimal(){
         for(Animal rabbit : rabbits){
-            if(!rabbit.isAlive()){
-                remove(rabbit);
+            if(rabbit != null) {
+                if (!rabbit.isAlive()) {
+                    remove(rabbit);
+                }
             }
         }
 
@@ -82,12 +88,13 @@ public class RabbitCoop extends Building implements AnimalCare {
 
     public void killRabbitAndMakeMeat(){
         for(Animal a : rabbits){
-            if(a.isAdult()) {
-                rabbitMeatAmount += 4.0;
-                remove(a);
-            }
-            else{
-                System.out.println("This rabbit: " +a.toString() + " is too young to kill it for meat.");
+            if(a != null) {
+                if (a.isAdult()) {
+                    rabbitMeatAmount += 4.0;
+                    remove(a);
+                } else {
+                    System.out.println("This rabbit: " + a.toString() + " is too young to kill it for meat.");
+                }
             }
         }
     }
@@ -115,7 +122,8 @@ public class RabbitCoop extends Building implements AnimalCare {
     }
     @Override
     public String toString(){
-        return "Rabbit coop name: "+ this.name + "  Rabbit coop description: "+ this.description + " Rabbit coop value: " +this.value +
-                " \nNumber of places for rabbits: " + this.placesForRabbits + " Number of rabbits now:  " + this.numberOfAnimals;
+        howManyAnimalsIsThere();
+        return "Rabbit coop name: "+ this.name + "  | Rabbit coop description: "+ this.description + " | Rabbit coop value: " +this.value +
+                " \nNumber of places for rabbits: " + this.placesForRabbits + " | Number of rabbits now:  " + this.numberOfAnimals;
     }
 }

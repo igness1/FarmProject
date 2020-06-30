@@ -60,20 +60,26 @@ public class DuckCoop extends Building implements AnimalCare {
     @Override
     public void animalsFeeding(){
         for(Animal duck : ducks){
-            duck.feed();
+            if(duck != null) {
+                duck.feed();
+            }
         }
     }
     @Override
-    public void animalsNotFeeding(){
+    public void animalGrowingOrNot(){
         for(Animal duck : ducks){
-            duck.looseWeight();
+            if(duck != null) {
+                duck.grow();
+            }
         }
     }
     @Override
     public void removesDeadAnimal(){
         for(Animal duck : ducks){
-            if(!duck.isAlive()){
-                remove(duck);
+            if(duck != null) {
+                if (!duck.isAlive()) {
+                    remove(duck);
+                }
             }
         }
 
@@ -81,11 +87,12 @@ public class DuckCoop extends Building implements AnimalCare {
 
     public void Egging(){
         for(Animal a : ducks){
-            if(a.isAdult()) {
-                duckEggAmount += 30;
-            }
-            else{
-                System.out.println("This duck: " +a.toString() + " is too young to give eggs.");
+            if(a != null) {
+                if (a.isAdult()) {
+                    duckEggAmount += 30;
+                } else {
+                    System.out.println("This duck: " + a.toString() + " is too young to give eggs.");
+                }
             }
         }
 
@@ -115,7 +122,8 @@ public class DuckCoop extends Building implements AnimalCare {
 
     @Override
     public String toString(){
-        return "Duck coop name: "+ this.name + "  Duck coop description: "+ this.description + " Duck coop value: " +this.value +
-                " \nNumber of places for ducks: " + this.placesForDucks + " Number of ducks now:  " + this.numberOfAnimals;
+        howManyAnimalsIsThere();
+        return "Duck coop name: "+ this.name + "  | Duck coop description: "+ this.description + " | Duck coop value: " +this.value +
+                " \nNumber of places for ducks: " + this.placesForDucks + " | Number of ducks now:  " + this.numberOfAnimals;
     }
 }

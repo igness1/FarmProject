@@ -1,11 +1,13 @@
 package com.company;
 
-public class Animal implements Feedable{
+public class Animal{
     final String species;
+
     protected Double currentWeight;
     protected Double weightWheAdult;
     protected Double weightNeededToDie;
     public String name;
+    public boolean isFed=false;
 
 
 
@@ -62,19 +64,30 @@ public class Animal implements Feedable{
             System.out.println("Animal: " + this + " - starved to death.");
         }
     }
-
-
-
-    @Override
     public void feed(){
+        isFed = true;
+    }
+
+
+    public void grow(){
         if(isAlive()) {
-            if (currentWeight < weightWheAdult) {
-                this.currentWeight = this.currentWeight + 1.0;
+            if(isFed == true) {
+                if (currentWeight < weightWheAdult) {
+                    this.currentWeight = this.currentWeight + 1.0;
+                    isFed = false;
+                    System.out.println("Your animal: " + this.species + " is growing.");
+                }
+                else {
+                    System.out.println("Your animal: " + this.species + " is adult.");
+                }
             }
-            System.out.println("Your animal: " + this + " was feeded.");
+            else{
+                looseWeight();
+                System.out.println("Your animal: " + this.species + " is hungry, because in these week it didn't get food.");
+            }
         }
         else{
-            System.out.println("Your animal: " + this + " is dead, becouse you don't feed it proprerly.");
+            System.out.println("Your animal: " + this.species + " is dead, becouse you don't feed it proprerly.");
         }
     }
 
