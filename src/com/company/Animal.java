@@ -52,10 +52,12 @@ public class Animal{
     }
 
     public boolean isAdult(){
-        if(this.currentWeight==weightWheAdult){
+        if(this.currentWeight==this.weightWheAdult){
             return true;
         }
-        else return false;
+        else{
+            return false;
+        }
     }
     //when animal is not feeded
     public void looseWeight(){
@@ -73,9 +75,15 @@ public class Animal{
         if(isAlive()) {
             if(isFed == true) {
                 if (currentWeight < weightWheAdult) {
-                    this.currentWeight = this.currentWeight + 1.0;
+
                     isFed = false;
                     System.out.println("Your animal: " + this.species + " is growing.");
+                    if(this.species=="cow"){
+                        this.currentWeight = this.currentWeight + 20.0;
+                    }
+                    else{
+                        this.currentWeight = this.currentWeight + 1.0;
+                    }
                 }
                 else {
                     System.out.println("Your animal: " + this.species + " is adult.");

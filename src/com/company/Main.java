@@ -9,7 +9,7 @@ public class Main {
         Player player1 = new Player();
         Merchant merchant = new Merchant();
 
-        System.out.println("WELCOME IN FARM STORY");
+        System.out.println("WELCOME IN FARM STORY 1.0");
         System.out.println();
         System.out.println("You start the game with one of three farms to choose (selected randomly) and with 2000 coins.\n" +
                 "This farm has empty fields (for cultivation), and zero animals (you have to buy animals)\n" +
@@ -234,6 +234,8 @@ public class Main {
                 break;
             case 4:
                 player.buySeeds(merchant);
+                break;
+            case 5:
                 break;
             default:
                 System.out.println("Incorrect answer.Try again");
