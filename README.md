@@ -32,7 +32,7 @@ Few tips:
 
 
 ## Screenshots
-Example screenshot of calculator.
+Example screenshot of console game, we can see on the second screenshot main menu for player to administrate farm.
 
 <img src=./img/screenshot.PNG>
 <img src=./img/screenshot1.PNG>
