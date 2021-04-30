@@ -10,7 +10,6 @@ public class Animal{
     public boolean isFed=false;
 
 
-
     public static final Double DEFAULT_ADULT_COW_WEIGHT = 500.0;
     public static final Double DEFAULT_ADULT_CHICKEN_WEIGHT = 5.0;
     public static final Double DEFAULT_ADULT_DUCK_WEIGHT = 6.0;
@@ -20,7 +19,6 @@ public class Animal{
     public static final Double DEFAULT_YOUNG_CHICKEN_WEIGHT = 1.0;
     public static final Double DEFAULT_YOUNG_DUCK_WEIGHT = 1.0;
     public static final Double DEFAULT_YOUNG_RABBIT_WEIGHT = 1.0;
-
 
 
     public Animal(String species) {
@@ -42,7 +40,6 @@ public class Animal{
             this.weightWheAdult = DEFAULT_ADULT_RABBIT_WEIGHT;
             this.weightNeededToDie = 0.75*DEFAULT_YOUNG_RABBIT_WEIGHT;
         }
-
     }
     public boolean isAlive(){
         if (this.currentWeight<=weightNeededToDie){
@@ -69,7 +66,6 @@ public class Animal{
     public void feed(){
         isFed = true;
     }
-
 
     public void grow(){
         if(isAlive()) {
@@ -98,10 +94,6 @@ public class Animal{
             System.out.println("Your animal: " + this.species + " is dead, becouse you don't feed it proprerly.");
         }
     }
-
-
-
-
 
     public String toString(){
         return this.species ;
