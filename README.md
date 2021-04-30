@@ -34,8 +34,8 @@ Few tips:
 ## Screenshots
 Example screenshot of calculator.
 
-<img src=./img/screenshot.png width="400" >
-<img src=./img/screenshot1.png width="400" >
+<img src=./img/screenshot.PNG>
+<img src=./img/screenshot1.PNG >
 
 
 ## Technologies
